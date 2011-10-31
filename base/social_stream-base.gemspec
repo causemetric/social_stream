@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   # Runtime gem dependencies
   #
   # Rails
-  s.add_runtime_dependency('rails', '>= 3.1.0')
+  s.add_runtime_dependency('rails', '~> 3.1.0')
   # Activity and Relation hierarchies
   s.add_runtime_dependency('ancestry', '~> 1.2.3')
   # SQL foreign keys

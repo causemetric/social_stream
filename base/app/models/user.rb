@@ -9,12 +9,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :profile_attributes
   
-  validates_presence_of :email
-
-  validates_format_of :email, :with => Devise.email_regexp, :allow_blank => true
-
-  validate :email_must_be_uniq
-  
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
     v.validates_confirmation_of :password
@@ -46,15 +40,6 @@ class User < ActiveRecord::Base
     !persisted? || !password.nil? || !password_confirmation.nil?
   end
 
-  private
-
-  def email_must_be_uniq
-    user = User.find_by_email(email)
-    if user.present? && user.id =! self.id
-      errors.add(:email, "is already taken")
-    end
-  end
-  
   class << self
     %w( email slug name ).each do |a|
       eval <<-EOS
